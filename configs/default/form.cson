@@ -1,0 +1,18 @@
+angular: [
+  {
+    "key": "options.components",
+    "add": "Add Component",
+    "style": {
+      "add": "btn-success"
+    },
+    "items": [
+      "options.components[].name",
+      "options.components[].direction",
+      "options.components[].pin",
+      {
+        "key": "options.components[].pullsetting",
+        "condition": "model.options.components[arrayIndex].direction=='input'"
+      }
+    ]
+  }
+]

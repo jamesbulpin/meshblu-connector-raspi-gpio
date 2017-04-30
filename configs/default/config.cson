@@ -1,0 +1,44 @@
+title: "Default Configuration"
+type: "object"
+properties:
+  options:
+    title: "Options"
+    type: "object"
+    properties:
+      'components':
+        'type': 'array'
+        'items':
+          'type': 'object'
+          'properties':
+            'name':
+              'title': 'Name'
+              'type': 'string'
+              'description': 'Name this component anything you like. (i.e Red LED, or PIR detector). Sensor output will show up under this name in payload'
+              'required': true
+            'direction':
+              'title': 'Direction'
+              'type': 'string'
+              'enum': [
+                'input'
+                'output'
+              ]
+              'required': true
+            'pin':
+              'title': 'Pin'
+              'type': 'string'
+              'description': 'Pin used for this component. (Use the raspi-gpio format https://github.com/nebrius/raspi-io/wiki/Pin-Information , e.g. GPIO11 or P1-23)'
+              'required': true
+            'pullsetting':
+              'title': 'Pull up/down setting for input pins'
+              'type': 'string'
+              'enum': [
+                'Pull up'
+                'Pull down'
+                'Pull none'
+              ]
+              'required': false
+          'required': [
+            'name'
+            'direction'
+            'pin'
+          ]

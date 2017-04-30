@@ -1,0 +1,14 @@
+title: 'PinOutput'
+type: 'object'
+properties:
+  data:
+    type: 'object'
+    properties:
+      pinname:
+        type: 'string'
+      value:
+        type: 'string'
+    required: [
+      'pinname'
+      'value'
+    ]
