@@ -18,6 +18,7 @@ build:
     - script:
         name: compile
         code: |
+          apt-get install -y pigpio:armhf
           compile "$WERCKER_SOURCE_DIR" "$WERCKER_OUTPUT_DIR"
           mv "${WERCKER_OUTPUT_DIR}/app-linux-arm.tar.gz" "${WERCKER_OUTPUT_DIR}/raspi-gpio-linux-arm.tar.gz"
     # - internal/store-container
