@@ -25,7 +25,7 @@ build:
           apt-get install -y pigpio:armhf
           compile "$WERCKER_SOURCE_DIR" "$WERCKER_OUTPUT_DIR"
           mv "${WERCKER_OUTPUT_DIR}/app-linux-arm.tar.gz" "${WERCKER_OUTPUT_DIR}/raspi-gpio-linux-arm.tar.gz"
-          cd "$WERCKER_SOURCE_DIR" && npm run generate:schema
+          cd "$WERCKER_SOURCE_DIR" && /opt/node/bin/npm run generate:schema
           mv "${WERCKER_SOURCE_DIR}/schemas.json" "${WERCKER_OUTPUT_DIR}/schemas.json"
     # - internal/store-container
 deploy:
