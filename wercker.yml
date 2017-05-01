@@ -25,6 +25,8 @@ build:
           apt-get install -y pigpio:armhf
           compile "$WERCKER_SOURCE_DIR" "$WERCKER_OUTPUT_DIR"
           mv "${WERCKER_OUTPUT_DIR}/app-linux-arm.tar.gz" "${WERCKER_OUTPUT_DIR}/raspi-gpio-linux-arm.tar.gz"
+          cd "$WERCKER_SOURCE_DIR" && npm run generate:schema
+          mv "${WERCKER_SOURCE_DIR}/schemas.json" "${WERCKER_OUTPUT_DIR}/schemas.json"
     # - internal/store-container
 deploy:
   steps:
@@ -39,3 +41,9 @@ deploy:
             --tag "$(cat "${WERCKER_ROOT}/VERSION")" \
             --name "raspi-gpio-linux-arm.tar.gz" \
             --file "${WERCKER_ROOT}/raspi-gpio-linux-arm.tar.gz"
+          github-release upload \
+            --user jamesbulpin \
+            --repo meshblu-connector-raspi-gpio \
+            --tag "$(cat "${WERCKER_ROOT}/VERSION")" \
+            --name "schemas.json" \
+            --file "${WERCKER_ROOT}/schemas.json"
