@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-raspi-gpio",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Meshblu Connector for Raspberry Pi GPIO",
   "homepage": "https://github.com/jamesbulpin/meshblu-connector-raspi-gpio",
   "bugs": "https://github.com/jamesbulpin/meshblu-connector-raspi-gpio/issues",

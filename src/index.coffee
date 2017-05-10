@@ -7,6 +7,7 @@ class Connector extends EventEmitter
   constructor: ->
     @pins = {}
     @names = {}
+    @timeouts = {}
 
   isOnline: (callback) =>
     callback null, running: true
@@ -15,10 +16,18 @@ class Connector extends EventEmitter
     debug 'on close'
     callback()
 
+  _pinChangeSend: (x, name, value) =>
+    debug 'emit', name, value, new Date().getTime()
+    x.emit 'message', { devices: "*", data: {component:name, value:value}}
+
   pinChange: (name, value) =>
     debug 'pinChange', name, value, new Date().getTime()
-    @emit 'message', { devices: "*", data: {component:name, value:value}}
-    
+    try 
+      clearTimeout(@timeouts[name])
+    catch
+      null
+    @timeouts[name] = setTimeout(@_pinChangeSend.bind(null, this, name, value), 50)
+
   configurePin: (component) =>
     debug 'configuring pin', component.name, component.pin
     pullsetting = if component?.pullsetting? then component.pullsetting else "Pull none"
@@ -86,7 +95,8 @@ class Connector extends EventEmitter
       @names = {}
       for pin of @pins
         @names[@pins[pin].name] = pin
-          
+        @timeouts[@pins[pin].name] = undefined
+        
   start: (device, callback) =>
     debug 'started'
     raspi.init(() =>
